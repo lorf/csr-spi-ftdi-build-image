@@ -30,3 +30,10 @@ deploy:
   script: docker push "$IMAGE"
   on:
     all_branches: true
+
+notifications:
+  email:
+    recipients:
+      - $EMAIL
+    on_success: never
+    on_failure: always
