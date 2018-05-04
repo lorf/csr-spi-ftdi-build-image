@@ -33,7 +33,5 @@ deploy:
 
 notifications:
   email:
-    recipients:
-      - $EMAIL
     on_success: never
     on_failure: always

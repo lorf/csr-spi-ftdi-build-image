@@ -9,7 +9,3 @@ RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula selec
         zip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-RUN groupadd -r build && useradd --no-log-init -r -g build -m build
-WORKDIR /home/build
-USER build
