@@ -2,10 +2,31 @@ sudo: required
 
 language: generic
 
+env:
+  global:
+    - IMAGE=lorf/csr-spi-ftdi-build:ubuntu-16.04-i386
+
 services:
   - docker
 
+branches:
+  only:
+    - master
+
+before_script:
+  - docker pull "$IMAGE" || true
+
 script:
-  - docker build -t lorf/csr-spi-ftdi-build:ubuntu-i386 .
+  - docker build --pull --cache-from "$IMAGE" -t "$IMAGE" .
+
+after_script:
+  - docker images
+
+before_deploy:
   - ./docker-login.sh
-  - docker push lorf/csr-spi-ftdi-build:ubuntu-i386
+
+deploy:
+  provider: script
+  script: docker push "$IMAGE"
+  on:
+    all_branches: true
