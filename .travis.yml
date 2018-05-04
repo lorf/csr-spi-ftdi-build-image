@@ -1,0 +1,11 @@
+sudo: required
+
+language: generic
+
+services:
+  - docker
+
+script:
+  - docker build -t lorf/csr-spi-ftdi-build:ubuntu-i386 .
+  - ./docker-login.sh
+  - docker push lorf/csr-spi-ftdi-build:ubuntu-i386
